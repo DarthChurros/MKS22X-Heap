@@ -32,13 +32,14 @@ public class MyHeap {
   }
 
   public static void heapify(int[] data) {
-    for (int i = (int)(Math.log(data.length)/Math.log(2)); i >= 0; i--) {
+    for (int i = (int)Math.pow(2,Math.log(data.length)/Math.log(2)); i >= 0; i--) {
+      //System.out.println("pushing down data["+i+"]");
       pushDown(data, data.length, i);
     }
   }
 
   public static void main(String[] args) {
-    int size = 6;
+    int size = 15;
     int[] test = new int[size];
     for (int i = 0; i < size; i++) test[i] = (int)(Math.random()*9);
     HeapPrinter.print(test);
