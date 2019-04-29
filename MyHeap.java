@@ -7,9 +7,8 @@ public class MyHeap {
 
   private static void pushDown(int[] data, int size, int index) {
     boolean run = true;
-    //System.out.println("pushing down index "+index);
     while (run && index < size) {
-      try {
+      if (2*index+2 < size) {
         if (data[index] >= data[2*index+1] && data[index] >= data[2*index+2]) {
           run = false;
         } else if (data[2*index+1] > data[2*index+2]){
@@ -19,15 +18,12 @@ public class MyHeap {
           swap(data, index, 2*index+2);
           index = 2*index+2;
         }
-      } catch (IndexOutOfBoundsException e) {
-        try {
-          if (data[index] < data[2*index+1]) {
-            swap(data, index, 2*index+1);
-          }
-        } catch (IndexOutOfBoundsException f) {}
+      } else if (2*index+1 < size && data[index] < data[2*index+1]) {
+        swap(data, index, 2*index+1);
+        run = false;
+      } else {
         run = false;
       }
-      //HeapPrinter.print(data);
     }
   }
 
@@ -40,7 +36,8 @@ public class MyHeap {
 
   public static void heapsort(int[] data) {
     heapify(data);
-    for (int i = data.length; i > 0; i++) {
+    for (int i = data.length-1; i >= 0; i--) {
+      swap(data, 0, i);
       pushDown(data, i, 0);
     }
   }
@@ -50,7 +47,7 @@ public class MyHeap {
     int[] test = new int[size];
     for (int i = 0; i < size; i++) test[i] = (int)(Math.random()*9);
     HeapPrinter.print(test);
-    heapify(test);
+    heapsort(test);
     HeapPrinter.print(test);
   }
 }
