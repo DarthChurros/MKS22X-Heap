@@ -38,6 +38,13 @@ public class MyHeap {
     }
   }
 
+  public static void heapsort(int[] data) {
+    heapify(data);
+    for (int i = data.length; i > 0; i++) {
+      pushDown(data, i, 0);
+    }
+  }
+
   public static void main(String[] args) {
     int size = 15;
     int[] test = new int[size];
