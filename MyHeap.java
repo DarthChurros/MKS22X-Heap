@@ -19,16 +19,24 @@ public class MyHeap {
           index = 2*index+2;
         }
       } catch (IndexOutOfBoundsException e) {
-        swap(data, index, 2*index+1);
+        try {
+          swap(data, index, 2*index+1);
+        } catch (IndexOutOfBoundsException f) {}
         run = false;
       }
     }
   }
 
+  public static void heapify(int[] data) {
+    for (int i = (int)(Math.log(data.length)/Math.log(2)); i >= 0; i--) {
+      pushDown(data, data.length, i);
+    }
+  }
+
   public static void main(String[] args) {
-    int[] test = new int[]{1, 2, 3, 4, 5, 6};
+    int[] test = new int[]{1, 2, 3, 4, 5, 6, 7};
     HeapPrinter.print(test);
-    pushDown(test, 6, 0);
+    pushDown(test, 7, 0);
     HeapPrinter.print(test);
   }
 }
