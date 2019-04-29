@@ -30,13 +30,16 @@ public class MyHeap {
   public static void heapify(int[] data) {
     for (int i = (int)(Math.log(data.length)/Math.log(2)); i >= 0; i--) {
       pushDown(data, data.length, i);
+      HeapPrinter.print(data);
     }
   }
 
   public static void main(String[] args) {
-    int[] test = new int[]{1, 2, 3, 4, 5, 6, 7};
+    int size = 6;
+    int[] test = new int[size];
+    for (int i = 0; i < size; i++) test[i] = (int)(Math.random()*9);
     HeapPrinter.print(test);
-    pushDown(test, 7, 0);
+    heapify(test);
     HeapPrinter.print(test);
   }
 }
